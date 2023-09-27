@@ -55,7 +55,7 @@ module.exports.deleteMovie = (req, res, next) => {
         throw new OwnerMovieError('Вы можете удалить только свой фильм');
       }
       return Movie.deleteOne(movie)
-        .then(() => res.status(200).send({ message: 'Фильм успешно удалена' }));
+        .then(() => res.status(200).send({ message: 'Фильм успешно удален' }));
     })
     .catch((err) => {
       if (err.message === 'movieNotFound') {
