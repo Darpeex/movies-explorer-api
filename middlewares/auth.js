@@ -1,3 +1,4 @@
+require('dotenv').config(); // для извлечения значений из process.env
 const jwt = require('jsonwebtoken'); // импортируем модуль jsonwebtoken (jwt)
 
 const { NODE_ENV, JWT_SECRET } = process.env; // достали константы из .env
@@ -17,6 +18,7 @@ module.exports = (req, res, next) => {
     req.user = payload;
     next();
   } catch (err) {
+    console.log(`Ошибка авторизации: ${err.message}`);
     next(err);
   }
 };
