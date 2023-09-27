@@ -1,15 +1,11 @@
 const { celebrate, Joi } = require('celebrate'); // библиотека для валидации данных
 
-const patternUrl = /^(https?:\/\/)?(?:www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/; // паттерн регулярки
-
 const signupValidator = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    name: Joi.string().min(2).max(30),
+    email: Joi.string().min(2).max(30).required()
+      .email(), // проверка на соответствие email
     password: Joi.string().required(),
-    name: Joi.string().default('Жак-Ив Кусто').min(2).max(30),
-    about: Joi.string().default('Исследователь').min(2).max(30),
-    avatar: Joi.string().default('https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png')
-      .pattern(patternUrl),
   }),
 });
 
