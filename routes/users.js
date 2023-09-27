@@ -1,9 +1,6 @@
 const { celebrate, Joi } = require('celebrate'); // библиотека для валидации данных
 const router = require('express').Router(); // создание нового экземпляра маршрутизатора вместо app
-
-const {
-  getUserInfo, updateUserInfo,
-} = require('../controllers/users');
+const { getUserInfo, updateUserInfo } = require('../controllers/users'); // контроллеры
 
 router.get('/users/me', getUserInfo); // возвращает информацию о пользователе (email и имя)
 

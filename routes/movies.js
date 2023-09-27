@@ -1,9 +1,8 @@
 const { celebrate, Joi } = require('celebrate'); // библиотека для валидации данных
 const router = require('express').Router(); // создание нового экземпляра маршрутизатора вместо app
+const { getMovies, createMovie, deleteMovie } = require('../controllers/movies'); // контроллеры
 
-const {
-  getMovies, createMovie, deleteMovie,
-} = require('../controllers/movies');
+const RegExp = /^(http|https):\/\/(www\.)?[a-zA-Z0-9\--._~:/?#[\]@!$&'()*+,;=]+#?$/;
 
 router.get('/movies', getMovies); // возвращает все сохранённые пользователем фильмы
 router.post('/movies', celebrate({ // создаёт фильм
@@ -13,11 +12,11 @@ router.post('/movies', celebrate({ // создаёт фильм
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().pattern(/^(http|https):\/\/(www\.)?[a-zA-Z0-9\--._~:/?#[\]@!$&'()*+,;=]+#?$/).required(),
-    trailer: Joi.string().pattern(/^(http|https):\/\/(www\.)?[a-zA-Z0-9\--._~:/?#[\]@!$&'()*+,;=]+#?$/).required(),
+    image: Joi.string().pattern(RegExp).required(),
+    trailer: Joi.string().pattern(RegExp).required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-    thumbnail: Joi.string().pattern(/^(http|https):\/\/(www\.)?[a-zA-Z0-9\--._~:/?#[\]@!$&'()*+,;=]+#?$/).required(),
+    thumbnail: Joi.string().pattern(RegExp).required(),
     movieId: Joi.number().integer().required(),
   }),
 }), createMovie);
