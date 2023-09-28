@@ -31,10 +31,12 @@ const { PORT = 3000, BD_URL = 'mongodb://localhost:27017/bitfilmsdb' } = process
 const app = express(); // cоздаём объект приложения
 
 const whitelist = [ // список разрешенных доменов
-  'https://darpeex.nomoredomainsicu.ru',
-  'http://darpeex.nomoredomainsicu.ru',
+  'https://diploma.darpeex.nomoredomainsrocks.ru/',
+  'http://diploma.darpeex.nomoredomainsrocks.ru/',
   'https://localhost:3001',
   'http://localhost:3001',
+  'https://praktikum.tk',
+  'http://praktikum.tk',
 ];
 
 const corsOptions = {
