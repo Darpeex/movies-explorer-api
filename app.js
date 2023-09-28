@@ -35,6 +35,8 @@ const whitelist = [ // список разрешенных доменов
   'http://diploma.darpeex.nomoredomainsrocks.ru/',
   'https://localhost:3001',
   'http://localhost:3001',
+  'https://praktikum.tk',
+  'http://praktikum.tk',
 ];
 
 const corsOptions = {
