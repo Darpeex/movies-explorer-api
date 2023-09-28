@@ -18,7 +18,6 @@ module.exports = (req, res, next) => {
     req.user = payload;
     next();
   } catch (err) {
-    console.log(`Ошибка авторизации: ${err.message}`);
     next(err);
   }
 };
