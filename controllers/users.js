@@ -66,10 +66,10 @@ module.exports.updateUserInfo = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       } // иначе отправим клиенту новые данные
       return res.status(200).send(user);
-    }).catch((err) => { // если введённые данные некорректны, возвращается ошибка с кодом '400'
+    }).catch((err) => {
       if (err.code === 11000) {
         return next(new EmailExistenceError('Пользователь с данным email уже существует'));
-      }
+      } // если введённые данные некорректны, возвращается ошибка с кодом '400'
       if (err.name === 'ValidationError') {
         next(new RequestError('Переданы некорректные данные пользователя'));
       } else { // иначе, по-умолчанию, ошибка с кодом '500'
