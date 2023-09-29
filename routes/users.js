@@ -8,7 +8,7 @@ router.patch( // обновляет информацию о пользовате
   '/users/me',
   celebrate({
     body: Joi.object().keys({
-      name: Joi.string().min(2).max(30).required(),
+      name: Joi.string().min(2).max(30),
       email: Joi.string().email(),
     }).options({ abortEarly: false }), // проверяет все поля, даже если есть ошибка в одном из них
   }),

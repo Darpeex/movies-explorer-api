@@ -58,7 +58,7 @@ module.exports.updateUserInfo = (req, res, next) => {
   // runValidators проверяет поля перед сохранением в БД, new - возвращает обновленный документ
   const options = { runValidators: true, new: true }; // включена валидация и сразу обновление
   // req.body содержит обновленные данные профиля пользователя
-  const updatedInfo = { name: req.body.name };
+  const updatedInfo = { name: req.body.name, email: req.body.email };
 
   return User.findByIdAndUpdate(id, updatedInfo, options) // передаём id и новые данные
     .then((user) => { // если обновление профиля выполнено успешно, выполнится след. блок
@@ -67,6 +67,9 @@ module.exports.updateUserInfo = (req, res, next) => {
       } // иначе отправим клиенту новые данные
       return res.status(200).send(user);
     }).catch((err) => { // если введённые данные некорректны, возвращается ошибка с кодом '400'
+      if (err.code === 11000) {
+        return next(new EmailExistenceError('Пользователь с данным email уже существует'));
+      }
       if (err.name === 'ValidationError') {
         next(new RequestError('Переданы некорректные данные пользователя'));
       } else { // иначе, по-умолчанию, ошибка с кодом '500'

@@ -7,7 +7,8 @@ const NotFoundError = require('../errors/not-found-err'); // 404
 
 // возвращает все фильмы
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({}) // status(200) добавляется по дефолту
+  const owner = req.user._id;
+  Movie.find({ owner }) // status(200) добавляется по дефолту
     .then((movies) => res.send(movies.reverse())) // успешно - возвращаем фильмы
     .catch(next); // переходим в центролизованный обработчик
 };

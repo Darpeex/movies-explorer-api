@@ -23,7 +23,6 @@ const movieRouter = require('./routes/movies');
 // валидаторы для роутов
 const { signupValidator } = require('./validators/signup-validator');
 const { signinValidator } = require('./validators/signin-validator');
-const { signoutValidator } = require('./validators/signout-validator');
 
 dotenv.config(); // для получения данных из .env. Можно короче "require('dotenv').config();"
 const { PORT = 3000, BD_URL = 'mongodb://localhost:27017/bitfilmsdb' } = process.env; // порт и ссылка на БД
@@ -69,14 +68,14 @@ app.use(auth);
 // роуты, которым авторизация нужна
 app.use(userRouter);
 app.use(movieRouter);
-app.post('/signout', signoutValidator, logout); // выходим из под пользователя
-
-// логгер ошибок
-app.use(errorLogger);
+app.post('/signout', logout); // выходим из под пользователя
 
 app.use((req, res, next) => { // предупреждаем переход по отсутсвующему пути
   next(new NotFoundError('Путь не найден'));
 });
+
+// логгер ошибок
+app.use(errorLogger);
 
 // обработчик ошибок celebrate от валидации joi
 app.use(errors());
