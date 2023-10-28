@@ -33,7 +33,7 @@ const movieSchema = new mongoose.Schema(
         message: 'Некорректный URL',
       },
     },
-    trailer: { // ссылка на трейлер фильма
+    trailerLink: { // ссылка на трейлер фильма
       type: String,
       required: [true, 'Поле "trailerLink" должно быть заполнено'],
       validate: { // проверка на соответствие url
@@ -55,7 +55,7 @@ const movieSchema = new mongoose.Schema(
       ref: 'User',
     },
     movieId: { // id фильма, который содержится в ответе сервиса MoviesExplorer
-      type: String,
+      type: Number,
       required: [true, 'Поле "movieId" должно быть заполнено'],
     },
     nameRU: { // название фильма на русском языке
