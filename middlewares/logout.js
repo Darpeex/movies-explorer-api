@@ -2,7 +2,7 @@
 module.exports.logout = (req, res, next) => {
   try {
     res
-      .clearCookie('jwt', { path: '/signin' })
+      .clearCookie('jwt', { path: '/' })
       .send({ message: 'Выполнен выход из системы' });
   } catch (err) {
     next(err);
